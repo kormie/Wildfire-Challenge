@@ -4,3 +4,6 @@
   %ul
     - likes.each do |like|
       %li= like['name']
+- current_user.friends_by_name.each do |f|
+  %p
+    = f['name']

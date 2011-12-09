@@ -33,6 +33,7 @@ class FacebookController < ApplicationController
       if fb_user_info = @oauth.get_user_info_from_cookie(request.cookies)
         @graph = Koala::Facebook::GraphAPI.new(fb_user_info['access_token'])
         @user = User.new(@graph, fb_user_info['uid'])
+        @feed = @graph.get_connections("me", "feed")
       end
     end
 end
