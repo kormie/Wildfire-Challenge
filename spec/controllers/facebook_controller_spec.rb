@@ -1,6 +1,20 @@
 require 'spec_helper'
 
 describe FacebookController do
+  
+  describe "show" do
+    before do
+      user_info = {'access_token' => '1234567890', 'uid' => 42}
+      @friend = User.new(mock('graph'), 45)
+      @oauth = mock('oauth')
+      @graph = mock('graph')
+      @feed = mock('feed')
+      @user.should_receive(:feed).and_return(@feed)
+      
+      get :show
+    end
+
+  end
 
   describe 'index with GET' do
     before do

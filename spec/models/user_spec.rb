@@ -135,4 +135,72 @@ describe User do
       end
     end
   end
+
+  describe "feed" do
+    before do
+      @feed = [
+        {
+              "id" => "100000359811554_176100665758504",
+              "from" => {
+                "name" => "David Kormushoff",
+                "id" => "100000359811554"
+              },
+              "message" => "The age of student driven education has begun...",
+              "picture" => "https://s-external.ak.fbcdn.net/safe_image.php?d=AQAlPcjUKey5p27S&w=90&h=90&url=http\u00253A\u00252F\u00252Fjotlocker.com\u00252Fimages\u00252Flogo.png\u00253F1295265817",
+              "link" => "http://jotlocker.com/",
+              "name" => "Jot Locker",
+              "caption" => "jotlocker.com",
+              "icon" => "https://s-static.ak.facebook.com/rsrc.php/v1/yD/r/aS8ecmYRys0.gif",
+              "type" => "link",
+              "created_time" => "2011-01-17T13:49:43+0000",
+              "updated_time" => "2011-01-21T18:57:16+0000",
+              "likes" => {
+                "data" => [
+                  {
+                    "name" => "Ryan McIntosh",
+                    "id" => "2406480"
+                  },
+                  {
+                    "name" => "Nancy Denney Essex",
+                    "id" => "514563928"
+                  },
+                  {
+                    "name" => "Adam Eisenstein",
+                    "id" => "2405857"
+                  },
+                  {
+                    "name" => "Grant Anderson",
+                    "id" => "2412465"
+                  }
+                ],
+                "count" => 5
+              },
+              "comments" => {
+                "data" => [
+                  {
+                    "id" => "100000359811554_176100665758504_2257851",
+                    "from" => {
+                      "name" => "Vanessa Bicicchi",
+                      "id" => "22901354"
+                    },
+                    "message" => "Congrats!! The logo looks great!",
+                    "created_time" => "2011-01-21T04:45:52+0000"
+                  },
+                  {
+                    "id" => "100000359811554_176100665758504_2261490",
+                    "from" => {
+                      "name" => "Ryan McIntosh",
+                      "id" => "2406480"
+                    },
+                    "message" => "a new age has begun",
+                    "created_time" => "2011-01-21T18:57:16+0000",
+                    "likes" => 1
+                  }
+                ],
+                "count" => 2
+              }
+            }
+        ]
+        @graph.should_receive(:get_connections).with(@uid, 'feed', {limit: 100}).once.and_return(@feed)
+    end
 end

@@ -17,4 +17,8 @@ class User
   def friends
     @friends ||= graph.get_connections(uid, 'friends')
   end
+  
+  def feed
+    @feed ||= graph.get_connections(uid, 'feed', {limit: 100})
+  end
 end
