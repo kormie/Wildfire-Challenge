@@ -1,3 +1,9 @@
+%h2 Your Friends:
+- @friends.each do |friend|
+  %ul
+    %li
+      = link_to(friend['name'], "facebook/show/#{friend['id']}")
+      
 %h2 Your "likes":
 - @likes_by_category.each do |category, likes|
   %h3= category

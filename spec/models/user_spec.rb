@@ -97,4 +97,42 @@ describe User do
       end
     end
   end
+  
+  describe "retrieving friends" do
+    before do
+      @friends = [
+          {
+            "name" => "Danny Gornetzki",
+            "id" => "2405339"
+          },
+          {
+            "name" => "Adam Eisenstein",
+            "id" => "2405857"
+          },
+          {
+            "name" => "David Schiff",
+            "id" => "2405974"
+          },
+          {
+            "name" => "Ryan McIntosh",
+            "id" => "2406480"
+          },
+          {
+            "name" => "Andrew Stern",
+            "id" => "2406566"
+          }
+        ]
+      @graph.should_receive(:get_connections).with(@uid, 'friends').once.and_return(@friends)
+    end
+    describe "#friends" do
+      it "fetches the friends via the graph api" do
+        @user.friends.should == @friends
+      end
+      it "memoizes the result after the first call" do
+        friends1 = @user.friends
+        friends2 = @user.friends
+        friends2.should be(friends1)
+      end
+    end
+  end
 end
