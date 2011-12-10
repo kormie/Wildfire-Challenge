@@ -27,4 +27,10 @@ class User
       post['comments']['data'] if post['comments']['count'] > 0
     end.flatten.compact
   end
+  
+  def commenters
+    @commenters ||= @wall_comments.collect do |comment|
+      comment['from']['name']
+    end
+  end
 end
