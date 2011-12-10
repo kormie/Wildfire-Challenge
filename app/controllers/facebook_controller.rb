@@ -15,6 +15,7 @@ class FacebookController < ApplicationController
     @feed = @friend.feed
     @wall_comments = @friend.wall_comments
     @picture = @graph.get_picture(params[:id])
+    @commenters = @friend.commenter_name_and_frequency
   end
 
   def login

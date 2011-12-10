@@ -23,14 +23,19 @@ class User
   end
   
   def wall_comments
-    @wall_comments ||= feed.collect do |post|
+    feed.collect do |post|
       post['comments']['data'] if post['comments']['count'] > 0
     end.flatten.compact
   end
-  
-  def commenters
-    @commenters ||= @wall_comments.collect do |comment|
-      comment['from']['name']
-    end
+
+  def comments_by_user
+    wall_comments.group_by{|comment| comment['from']['name']}
   end
+
+  def commenter_name_and_frequency
+    @commenter_by_name_and_frequency ||= comments_by_user.collect do |comment|
+      {name: comment[0], frequency: comment[1].size}
+    end.sort_by{|commenter| commenter[1]}
+  end
+  
 end
