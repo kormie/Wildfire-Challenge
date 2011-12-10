@@ -1,15 +1,14 @@
-- commenters = @wall_comments.group_by{|comment| comment['from']['name']}.collect { |comment| [comment[0], comment[1].size] }.sort_by{|a| a[1]}.reverse
-- commenters.each do |commenter|
-  %p= commenter[0] + " made " + commenter[1].to_s + " comments"
+- @commenters.each do |commenter|
+  %p= commenter[:name] + " made " + commenter[:frequency].to_s + " comments"
 %p= image_tag @picture
 %ol
   - @feed.each do |post|
     %li
-      %p= post['story'] || post['message'] || post['name']
+      %p= raw post['story'] || post['message'] || post['name']
       %p= "~ #{post['from']['name']}"
     - if post['comments']['count'] > 0
       %ul
         - post['comments']['data'].each do |comment|
           %li
-            %p= "\"#{comment['message']}\" ~#{comment['from']['name']}"
+            %p= raw "\"#{comment['message']}\" ~#{comment['from']['name']}"
     

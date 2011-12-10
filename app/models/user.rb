@@ -33,9 +33,9 @@ class User
   end
 
   def commenter_name_and_frequency
-    @commenter_by_name_and_frequency ||= comments_by_user.collect do |comment|
+    @commenter_name_and_frequency ||= comments_by_user.collect do |comment|
       {name: comment[0], frequency: comment[1].size}
-    end.sort_by{|commenter| commenter[1]}
+    end.sort_by{|commenter| commenter[:frequency]}.reverse
   end
   
 end
