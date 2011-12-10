@@ -201,7 +201,7 @@ describe User do
               }
             }
         ]
-        @graph.should_receive(:get_connections).with(@uid, 'feed', {limit: 1000}).once.and_return(@feed)
+        @graph.should_receive(:get_connections).with(@uid, 'feed', {limit: 100}).once.and_return(@feed)
     end
     describe "messages" do
       it "returns a list of messages on the feed" do

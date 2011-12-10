@@ -1,3 +1,11 @@
-- @feed.each do |post|
-  %p= post['name']
+%p= image_tag @picture
+%ol
+  - @feed.each do |post|
+    %li= post['story'] || post['message']
+    - if post['comments']['count'] > 0
+      %ul
+        - post['comments']['data'].each do |comment|
+          %li
+            %p= comment['from']['name']
+            %p= comment['message']
     

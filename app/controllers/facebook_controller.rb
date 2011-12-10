@@ -14,6 +14,7 @@ class FacebookController < ApplicationController
     @friend = User.new(@graph, params[:id])
     @feed = @friend.feed
     @wall_comments = @friend.wall_comments
+    @picture = @graph.get_picture(params[:id])
   end
 
   def login
