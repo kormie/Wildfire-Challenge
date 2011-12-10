@@ -21,4 +21,8 @@ class User
   def feed
     @feed ||= graph.get_connections(uid, 'feed', {limit: 100})
   end
+  
+  def wall_comments
+    @wall_comments ||= feed.collect{ |post| post['comments']['data'] if post['comments']['count'] > 0}.flatten.compact
+  end
 end

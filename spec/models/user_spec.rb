@@ -203,4 +203,33 @@ describe User do
         ]
         @graph.should_receive(:get_connections).with(@uid, 'feed', {limit: 100}).once.and_return(@feed)
     end
+    describe "messages" do
+      it "returns a list of messages on the feed" do
+        comments = [
+            {
+              "id"=>"100000359811554_176100665758504_2257851",
+              "from"=> {
+                "name"=>"Vanessa Bicicchi",
+                "id"=>"22901354"
+              },
+              "message"=>"Congrats!! The logo looks great!",
+              "created_time"=>"2011-01-21T04:45:52+0000"
+                },
+            {
+              "id"=>"100000359811554_176100665758504_2261490",
+              "from"=> {
+                "name"=>"Ryan McIntosh",
+                "id"=>"2406480"
+              },
+              "message"=>"a new age has begun",
+              "created_time"=>"2011-01-21T18:57:16+0000",
+              "likes"=>1
+            }
+        ]
+        @user.wall_comments.should eq(comments)
+      end
+
+    end
+  end
+
 end

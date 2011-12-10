@@ -13,6 +13,7 @@ class FacebookController < ApplicationController
   def show
     @friend = User.new(@graph, params[:id])
     @feed = @friend.feed
+    @wall_comments = @friend.wall_comments
   end
 
   def login
